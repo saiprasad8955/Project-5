@@ -1,8 +1,5 @@
-const aws = require('aws-sdk')
 const validator = require("../validations/validator")
 const userModel = require("../models/userModel")
-const AWS = require("../AWS_S3/AWS_S3")
-
 
 //------------------ CREATING USER
 const createUser = async (req, res) => {

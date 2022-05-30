@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const bcrypt = require('bcrypt'); 
 
 const isValid = function (value) {
     if (typeof value === 'undefined' || value === null) return false
@@ -50,6 +51,11 @@ const isValidPassword = function (value) {
         return false
     }
     return true
+}
+
+const hashedPassword = async (password) => {
+    let pass = await bcrypt.hash(password, 10)
+    return pass;
 }
 
 const isValidPincode = function (value) {
@@ -134,6 +140,7 @@ module.exports = {
     isValidremoveProduct,
     isValidStatus,
     isValidImage,
-    isValidBoolean
+    isValidBoolean,
+    hashedPassword
 
 }
