@@ -2,11 +2,9 @@ const userModel = require("../models/userModel")
 const orderModel = require("../models/orderModel")
 const validator = require('../validations/validator')
 
-
-
 //------------------ PLACING OR CREATING AN ORDER
 const placeOrder = async (req, res) => {
-    
+
     try {
 
         // Extract userId From params
@@ -203,7 +201,6 @@ const updateOrderById = async (req, res) => {
 
     }
 };
-
 
 module.exports = {
     placeOrder,

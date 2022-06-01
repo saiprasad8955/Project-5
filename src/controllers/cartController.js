@@ -31,7 +31,7 @@ const createCart = async (req, res) => {
         const requestBody = req.body
 
         // check body is coming or not
-        if (!validator.isValidRequestBody(requestBody)) {
+        if (!validator.isValidBody(requestBody)) {
             return res.status(400).send({ status: false, message: "Please Provide Details In The Body" })
         }
 
@@ -71,10 +71,6 @@ const createCart = async (req, res) => {
             return res.status(404).send({ status: false, message: "Product not found" })
         }
 
-        // if (product.installments === 0) {
-        //     return res.status(400).send({ status: false, message: `Product Is Out Of Stock Currently.` })
-        // }
-
         // check cart exists or not 
         let isCartExist = await cartModel.findOne({ userId: userId })
 
@@ -93,11 +89,9 @@ const createCart = async (req, res) => {
                 totalPrice: product.price,
                 totalItems: 1
             }
-            console.log(newCartData)
 
             // finally create new cart
             const newCart = await cartModel.create(newCartData)
-            console.log(newCart)
             return res.status(201).send({ status: true, message: "Cart Successfully Created", data: newCart })
         }
 
@@ -126,8 +120,7 @@ const createCart = async (req, res) => {
                 {
                     $inc: {
                         "items.$.quantity": + 1,
-                        totalPrice: + product.price,
-                        totalItems: + 1
+                        totalPrice: + product.price
                     }
                 },
                 { new: true })
@@ -184,7 +177,7 @@ const updateCartById = async (req, res) => {
         const requestBody = req.body;
 
         // Validate the reqBody
-        if (!validator.isValidRequestBody(requestBody)) {
+        if (!validator.isValidBody(requestBody)) {
             return res.status(400).send({ status: false, message: `Invalid Request parameters` });
         }
 

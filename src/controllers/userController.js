@@ -47,9 +47,10 @@ const createUser = async (req, res) => {
       return
     }
 
-    if (validString.test(lname))
+    if (validString.test(lname)){
       return res.status(400).send({ status: false, msg: "LastName must be valid it should not contains numbers" });
-
+    }
+    
     // Get File for uploading Product Image
     let files = req.files;
     console.log(files);
