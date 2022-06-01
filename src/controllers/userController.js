@@ -342,8 +342,11 @@ const getUserById = async (req, res) => {
 const updateUserById = async (req, res) => {
  
   try {
-    // Validate body
+
+    // Store Requestbody in body
     const body = req.body
+
+    // Validate body
     if (!validator.isValidBody(body)) {
       return res.status(400).send({ status: false, msg: "Details must be present to update" })
     }
@@ -354,6 +357,7 @@ const updateUserById = async (req, res) => {
       return res.status(400).send({ status: false, msg: `${userId} is invalid` })
     }
 
+    // Check user Exists or not
     const userFound = await UserModel.findOne({ _id: userId })
     if (!userFound) {
       return res.status(404).send({ status: false, msg: "User does not exist" })

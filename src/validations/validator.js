@@ -70,22 +70,16 @@ const isValidPrice = function (value) {
     return false
 }
 
-// const isValidSize = function (value) {
-//     return ["S", "XS", "M", "X", "L", "XXL", "XL"].indexOf(value) !== -1
-// }
-
 
 const isValidSize = (Arr) => {
 
     let newArr = []
     if (Arr.length === 0) { return false };
     let brr = Arr[0].split(',')
-    //   console.log(brr)
     for (let i = 0; i < brr.length; i++) {
         if (!["S", "XS", "M", "X", "L", "XXL", "XL"].includes(brr[i].toUpperCase())) { return false; }
         newArr.push(brr[i].toUpperCase())
     }
-    //   console.log(newArr)
     return newArr
 }
 
