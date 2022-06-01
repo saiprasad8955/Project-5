@@ -12,8 +12,8 @@ const middleware = require('../middleware/authentication')
 //----------- USER API'S
 router.post('/register', userController.createUser)
 router.post('/login', userController.loginUser)
-router.get('/user/:userId/profile', userController.getUserById)
-router.put('/user/:userId/profile', userController.updateUserById)
+router.get('/user/:userId/profile', middleware.authentication, userController.getUserById)
+router.put('/user/:userId/profile', middleware.authentication, userController.updateUserById)
 
 //----------- PRODUCT API'S
 router.post('/products', productController.createProduct)
