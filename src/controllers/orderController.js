@@ -95,7 +95,7 @@ const placeOrder = async (req, res) => {
 
 
         // const totalQuantity = itemList.reduce( (acc,item) => acc +item.quantity, 0)
-
+        
         let orderObj = {
             userId,
             items,
@@ -140,9 +140,9 @@ const updateOrderById = async (req, res) => {
         }
 
         //  Authorization
-        // if(req.userId !== userId) {
-        //     return res.status(403).send({ status: false,message: `Authorisation failed; You are logged in as ${req.userId}, not as ${userId}`});
-        // }
+        if(req.userId !== userId) {
+            return res.status(403).send({ status: false,message: `Authorisation failed; You are logged in as ${req.userId}, not as ${userId}`});
+        }
 
         if (! validator.isValidBody(req.body)) {
             return res.status(400).send({ status: false, message: `Invalid Input Parameters` })

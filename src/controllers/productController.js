@@ -97,17 +97,18 @@ const createProduct = async (req, res) => {
             return res.status(400).send({ status: false, message: `Please Enter Valid Product Style` })
         }
 
+        if( ! Array.isArray(availableSizes)){
+            return res.status(400).send({ status: false, message: `Available Sizes Must be an Type Of Array` })
+        }
         // Validate the Available Sizes 
-        if (availableSizes && !validator.isValidSize(availableSizes)) {
+        if (availableSizes && ! validator.isValidSize(availableSizes)) {
             return res.status(400).send({ status: false, message: `Please Enter Valid Product Available Sizes` })
         }
-        if (availableSizes) availableSizes = validator.isValidSize(availableSizes);
 
         //  Validate Installments
-        if (installments && !validator.isvalidNum(installments)) {
-            return res.status(400).send({ status: false, message: `Please Enter Valid Product Installments` })
+        if((installments) &&  (! validator.isValidNumber(installments) || parseInt(installments) < 0) ){
+            return res.status(400).send({ status: false , message: 'Please Enter Valid Installments'})
         }
-
         // Create a new Object and set all things
         let finalData = {
             title,
@@ -117,7 +118,7 @@ const createProduct = async (req, res) => {
             currencyFormat,
             productImage: uploadedFileURL,
             style,
-            availableSizes,
+            availableSizes : validator.isValidSize(availableSizes) ,
             installments
         }
 
@@ -332,7 +333,7 @@ const updateProductById = async (req, res) => {
         if (availableSizes) {
 
             if (!Array.isArray(availableSizes)) {
-                return res.status(400).send({ status: false, data: "sizes must be an Array" })
+                return res.status(400).send({ status: false, data: "Available Sizes Must be an Type Of Array" })
             }
 
             if (!validator.isValidSize(availableSizes)) {
