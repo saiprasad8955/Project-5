@@ -17,9 +17,9 @@ const placeOrder = async (req, res) => {
         }
 
         // Authorization
-        // if(req.userId !== userId) {
-        //     return res.status(403).send({ status: false,message: `Authorisation failed; You are logged in as ${req.userId}, not as ${userId}`});
-        // }
+        if(req.userId !== userId) {
+           return res.status(403).send({ status: false,message: `Authorisation failed; You are logged in as ${req.userId}, not as ${userId}`});
+        }
 
         const userDoc = await userModel.findById(userId) 
 
