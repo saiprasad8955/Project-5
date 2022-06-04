@@ -23,9 +23,9 @@ const createCart = async (req, res) => {
         }
 
         //authorization
-        // if (userId != req.userId) {
-        //     return res.status(403).send({ status: false, message: "User not authorized to create a cart" })
-        // }
+        if (userId != req.userId) {
+            return res.status(403).send({ status: false, message: "User not authorized to create a cart" })
+        }
 
         // Extract Body from request
         const requestBody = req.body
@@ -169,9 +169,9 @@ const updateCartById = async (req, res) => {
         }
 
         // Authorization
-        // if (userId != req.userId) {
-        //     return res.status(403).send({ status: false, message: "user not authorized to update cart" })
-        // }
+        if (userId != req.userId) {
+            return res.status(403).send({ status: false, message: "user not authorized to update cart" })
+        }
 
         // Extract requestBody from reqbody
         const requestBody = req.body;

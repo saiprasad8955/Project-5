@@ -17,9 +17,9 @@ const placeOrder = async (req, res) => {
         }
 
         // Authorization
-        // if(req.userId !== userId) {
-        //     return res.status(403).send({ status: false,message: `Authorisation failed; You are logged in as ${req.userId}, not as ${userId}`});
-        // }
+        if(req.userId !== userId) {
+            return res.status(403).send({ status: false,message: `Authorisation failed; You are logged in as ${req.userId}, not as ${userId}`});
+        }
 
         const userDoc = await userModel.findById(userId) 
 
@@ -93,9 +93,6 @@ const placeOrder = async (req, res) => {
             return res.status(400).send({ status: false, message: `Total items Should Be A Number` })
         }
 
-
-        // const totalQuantity = itemList.reduce( (acc,item) => acc +item.quantity, 0)
-        
         let orderObj = {
             userId,
             items,
@@ -139,7 +136,7 @@ const updateOrderById = async (req, res) => {
             return res.status(404).send({ status: false, message: 'User does not exist in DB' }); 
         }
 
-        //  Authorization
+        // Authorization
         if(req.userId !== userId) {
             return res.status(403).send({ status: false,message: `Authorisation failed; You are logged in as ${req.userId}, not as ${userId}`});
         }

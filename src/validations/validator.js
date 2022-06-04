@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
 
 const isValid = function (value) {
     if (typeof value === 'undefined' || value === null) return false
@@ -116,7 +116,6 @@ const isValidBoolean = (value) => {
 }
 
 module.exports = {
-
     isValid,
     isValidBody,
     isValidobjectId,
@@ -136,5 +135,4 @@ module.exports = {
     isValidImage,
     isValidBoolean,
     hashedPassword
-
 }

@@ -233,9 +233,6 @@ const createUser = async (req, res) => {
   } catch (error) {
     res.status(500).send({ status: false, message: error.message });
   }
-
-
-
 };
 
 //------------------ USER LOGIN   

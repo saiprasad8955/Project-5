@@ -1,43 +1,42 @@
+const jwt = require('jsonwebtoken')
+
 // AUTHENTICATION
-const jwt = require("jsonwebtoken");
-
-//=========================================== authentication ===========================================================================================
-
-const authentication = async function (req, res, next) {
+const authentication = async (req, res, next) => {
 
   try {
 
-    //  Extract Bearer Token 
-    let token = req.headers.authorization;
+    // Extract token from Authorization
+    let token1 = req.headers['authorization']
 
     // if no token found
-    if (!token) {
-      return res.status(400).send({ status: false, message: "Token required! Please login to generate token" });
+    if (!token1) {
+      return res.status(401).send({ status: false, msg: "Authentication token is required" })
     }
 
-    // This👇 is written here to avoid internal server error (if token is not present)
-    token = token.split(" ")[1];
+    // split the bearer token 
+    let token2 = token1.split(' ')
 
-     jwt.verify( token, "$2b$10$Dx.w8Mt.uqF5y78DHE1Ya", { ignoreExpiration: true }, function (error, decodedToken) {
-        // if token is invalid
-        if (error) {
-          return res.status(400).send({ status: false, message: "Token is invalid" });
-        }
-        // if token is valid
-        else {
-          // if token expired
-          if (Date.now() > decodedToken.exp * 1000) {
-            return res.status(401).send({ status: false, message: "Session Expired" });
-          }
-          req.userId = decodedToken.userId;
-          next();
-        }
-      }
-    );
-  } catch (err) {
-    res.status(500).send({ status: false, message: "Internal Server Error", error: err.message});
+    // store the bearer token inside token
+    let token = token2[1]
+
+    // decode token
+    let decodedToken = jwt.verify(token, "Group8")
+
+    // if decoded token not found
+    if (! decodedToken) {
+      return res.status(400).send({ status: false, msg: "Token is not valid" })
+    }
+
+    // Store userId in request for authorization purpose
+    req.userId = decodedToken.userId;
+    next()
+
   }
-
+  catch (err) {
+    console.log("This is the error :", err.message)
+    res.status(500).send({ msg: "Error", error: err.message })
+  }
 };
+
 
 module.exports = { authentication }
