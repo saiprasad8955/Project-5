@@ -47,7 +47,7 @@ const isValidName = function (value) {
 }
 
 const isValidPassword = function (value) {
-    if (!(/^[a-zA-Z0-9'@&#.\s]{8,15}$/.test(value))) {
+    if (!(/^(?!\S*\s)(?=\D*\d)(?=.*[!@#$%^&*])(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z]).{8,15}$/.test(value))) {
         return false
     }
     return true
