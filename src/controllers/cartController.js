@@ -22,7 +22,7 @@ const createCart = async (req, res) => {
             return res.status(404).send({ status: false, message: "User not Found" });
         }
 
-        //authorization
+        // Authorization
         if (userId != req.userId) {
              return res.status(403).send({ status: false, message: "User not authorized to create a cart" })
         }
