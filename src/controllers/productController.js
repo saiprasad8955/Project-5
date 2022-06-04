@@ -203,6 +203,12 @@ const getProducts = async (req, res) => {
 
         // Now get products by calling in DB
         let dataByFilter = await productModel.find(filters).sort(sort)
+        
+        // if No Doc Found 
+        if(dataByFilter.length == 0){
+            return res.status(400).send({ status: true , msg:"Doc Not Found With these Filter"})   
+        }    
+        
         res.status(200).send({ status: true, msg: "Products Fetched Successfully", data: dataByFilter });
 
     } catch (err) {
