@@ -258,7 +258,7 @@ const updateCartById = async (req, res) => {
             const updatedCart = await cartModel.findOneAndUpdate({ userId: userId },
                 {
                     $pull: { items: { productId: productId } },
-                    $inc: { totalPrice: - productPrice, totalItems: - itemList[index].quantity }
+                    $inc: { totalPrice: - productPrice, totalItems: - 1 }
 
                 }, { new: true })
 
