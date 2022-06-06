@@ -42,6 +42,7 @@
     "destroy": "^1.2.0",
     "detect-libc": "^2.0.1",
     "dicer": "^0.2.5",
+    "dotenv": "^16.0.1",
     "ecdsa-sig-formatter": "^1.0.11",
     "ee-first": "^1.1.1",
     "emoji-regex": "^8.0.0",
