@@ -56,14 +56,15 @@ const createUser = async (req, res) => {
 
     // Get File for uploading Product Image
     let files = req.files;
-    console.log(files);
-    if (files && files.length > 0) {
 
+    // File is coming or not
+    if (files.length == 0) {
+      return res.status(400).send({ status: false, msg: "No file to Write ! Please Add the Product Image" })
+    }
+
+    if (files && files.length > 0) {
       if (!validator.isValidImage(files[0])) {
         return res.status(400).send({ status: false, message: `Invalid Image Type` })
-      }
-      else if (files.length == 0) {
-        return res.status(400).send({ status: false, msg: "No file to Write ! Please Add the Product Image" })
       }
     }
 
@@ -232,9 +233,6 @@ const createUser = async (req, res) => {
   } catch (error) {
     res.status(500).send({ status: false, message: error.message });
   }
-
-
-
 };
 
 //------------------ USER LOGIN   
@@ -308,6 +306,7 @@ const loginUser = async (req, res) => {
 
 //------------------ GETTING USER BY ID
 const getUserById = async (req, res) => {
+ 
   try {
 
     // Extract userId from Params
@@ -315,13 +314,13 @@ const getUserById = async (req, res) => {
 
     // if userId is not a valid ObjectId
     if (!validator.isValidobjectId(userId)) {
-      return res.status(400).send({ status: false, message: "userId is invalid" });
+      return res.status(400).send({ status: false, message: "UserId is invalid" });
     }
 
     // if user does not exist
     let userDoc = await userModel.findById(userId);
     if (!userDoc) {
-      return res.status(404).send({ status: false, message: "user does not exist" });
+      return res.status(404).send({ status: false, message: "User does not exist" });
     }
 
     //📌 AUTHORISATION:
@@ -335,7 +334,6 @@ const getUserById = async (req, res) => {
   } catch (err) {
     res.status(400).send({ status: false, message: "Internal Server Error", error: err.message });
   }
-
 
 };
 

@@ -199,8 +199,6 @@ const getProducts = async (req, res) => {
             sort.price = priceSort
         }
 
-        console.log(filters);
-
         // Now get products by calling in DB
         let dataByFilter = await productModel.find(filters).sort(sort)
         

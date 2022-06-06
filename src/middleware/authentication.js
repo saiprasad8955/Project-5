@@ -1,4 +1,3 @@
-// AUTHENTICATION
 const jwt = require('jsonwebtoken')
 
 // AUTHENTICATION
