@@ -345,7 +345,7 @@ const updateUserById = async (req, res) => {
   try {
 
     // Store Requestbody in body
-    const body = req.body
+    const body = JSON.parse(JSON.stringify(req.body))
 
     // Validate body
     if (!validator.isValidBody(body)) {

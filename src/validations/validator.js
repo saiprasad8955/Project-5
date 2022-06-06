@@ -25,7 +25,7 @@ const isValidString = function (value) {
 }
 
 const isValidEmail = function (value) {
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+    if (! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
         return false
     }
     return true
