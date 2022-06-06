@@ -20,10 +20,10 @@ const authentication = async (req, res, next) => {
     let token = Split[1]
 
     // Now Verify that token in Decoded Token
-    let decodedToken = jwt.verify(token, "Group8")
+    let decodedToken = jwt.verify(token, "$2b$10$Dx.w8Mt.uqF5y78DHE1Ya")
 
     // If decoded Token Not Found
-    if (!decodedToken) {
+    if (! decodedToken) {
       return res.status(400).send({ status: false, msg: "Token is not valid" })
     }
 
@@ -32,7 +32,6 @@ const authentication = async (req, res, next) => {
 
     // Now Simply Next the flow 
     next()
-
   }
   catch (err) {
     console.log("This is the error :", err.message)

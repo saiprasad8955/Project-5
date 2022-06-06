@@ -106,7 +106,7 @@ const createProduct = async (req, res) => {
         }
 
         //  Validate Installments
-        if((installments) &&  (! validator.isValidNumber(installments) || parseInt(installments) < 0) ){
+        if((installments) &&  (! validator.isvalidNum(installments) || parseInt(Number(installments)) < 0) ){
             return res.status(400).send({ status: false , message: 'Please Enter Valid Installments'})
         }
         // Create a new Object and set all things
@@ -130,7 +130,6 @@ const createProduct = async (req, res) => {
         res.status(500).send({ msg: "Error", error: err.message })
     }
 };
-
 
 //------------------ GETTING PRODUCT-------------------------------------------------//
 const getProducts = async (req, res) => {

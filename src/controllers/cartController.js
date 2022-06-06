@@ -239,10 +239,10 @@ const updateCartById = async (req, res) => {
         }
 
         // Store items in a Variable
-        itemList = isCartExist.items
-
+        const itemList = isCartExist.items
+        
         // Take ID List in variable through map
-        let idList = itemList.map((ele) => ele = ele.productId.toString())
+        let idList = itemList.map((ele) => { ele = ele.productId.toString() })
         let index = idList.indexOf(productId)
 
         // Check if index is equal to -1 then throw error

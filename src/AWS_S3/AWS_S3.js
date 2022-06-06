@@ -1,8 +1,6 @@
 /////////////////////////  Aws s3 -- Connection ////////////////////////////////////////////////
 const aws = require("aws-sdk")
 
-
-
 // Connecting to AWS
 aws.config.update({
     accessKeyId: "AKIAY3L35MCRUJ6WPO6J",
