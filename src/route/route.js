@@ -23,13 +23,13 @@ router.put('/products/:productId',    productController.updateProductById)
 router.delete('/products/:productId', productController.deleteProductById)
 
 //----------- CART API'S(PROTECTED ROUTES)
-router.post('/users/:userId/cart',   middleware.authentication, cartController.createCart)
+router.post('/users/:userId/cart',    cartController.createCart)
 router.put('/users/:userId/cart',    middleware.authentication, cartController.updateCartById)
-router.get('/users/:userId/cart',    middleware.authentication, cartController.getCartById)
+router.get('/users/:userId/cart',    middleware.authentication, cartController.getCartById   )
 router.delete('/users/:userId/cart', middleware.authentication, cartController.deleteCartById)
 
 //----------- ORDER API'S
-router.post('/users/:userId/orders', middleware.authentication, orderController.placeOrder     )
+router.post('/users/:userId/orders', orderController.placeOrder)
 router.put ('/users/:userId/orders', middleware.authentication, orderController.updateOrderById)
 
 // EXPORTING ROUTER

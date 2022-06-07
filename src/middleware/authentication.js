@@ -20,17 +20,24 @@ const authentication = async (req, res, next) => {
     let token = Split[1]
 
     // Now Verify that token in Decoded Token
-    let decodedToken = jwt.verify(token, "$2b$10$Dx.w8Mt.uqF5y78DHE1Ya")
+    jwt.verify(token, "$2b$10$Dx.w8Mt.uqF5y78DHE1Ya", { ignoreExpiration: true }, function (err, decoded) {
+      if (err) { 
+        return res.status(400).send({ status: false, meessage: "token invalid" }) }
+      else {
+        if (Date.now() > decoded.exp * 1000) {
+          return res.status(401).send({ status: false, msg: "Session Expired", });
+        }
+       
+       // Store Decoded Token User Id into request header named as userId
+       req.userId = decoded.userId;
+       
+       // Now Simply Next the flow 
+       next();
+      }
+    });
 
-    // If decoded Token Not Found
-    if (! decodedToken) {
-      return res.status(400).send({ status: false, msg: "Token is not valid" })
-    }
+    
 
-    // Store Decoded Token User Id into request header named as userId
-    req.userId = decodedToken.userId;
-
-    // Now Simply Next the flow 
     next()
   }
   catch (err) {
